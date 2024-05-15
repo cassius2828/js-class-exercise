@@ -11,22 +11,37 @@
     <!-- header -->
     <header>My Header for my Car App!</header>
     <!-- input fields -->
-    <div class="input-group">
-      <label for="make">Make:</label>
-      <input value="" type="text" id="make" />
+    <div class="input-groups-container">
+      <div class="input-group">
+        <label for="make">Make:</label>
+        <input value="" type="text" id="make" />
+      </div>
+      <div class="input-group">
+        <label for="model">model:</label>
+        <input type="text" id="model" />
+      </div>
+      <div class="input-group">
+        <label for="color">color:</label>
+        <input type="text" id="color" />
+      </div>
+      <div class="input-group">
+        <label for="price">price:</label>
+        <input type="number" id="price" />
+      </div>
+      <button>create car</button>
     </div>
-    <div class="input-group">
-      <label for="model">model:</label>
-      <input type="text" id="model" />
-    </div>
-    <div class="input-group">
-      <label for="color">color:</label>
-      <input type="text" id="color" />
-    </div>
-    <button>create car</button>
+
     <section>
       <!-- car list -->
-      <h4>Cars</h4>
+      <div class="display-header">
+        <h4>Cars</h4>
+        <label for="byPrice">Sort By</label>
+        <select id="byPrice">
+          <option value="id">id</option>
+          <option value="highest">highest price</option>
+          <option value="lowest">lowest price</option>
+        </select>
+      </div>
       <ul id="car-list"></ul>
     </section>
   </body>

@@ -14,17 +14,25 @@ cars = [];
 const makeInputEl = document.querySelector("#make");
 const modelInputEl = document.querySelector("#model");
 const colorInputEl = document.querySelector("#color");
+const priceInputEl = document.querySelector("#price");
 const generalInputEls = document.querySelectorAll("input");
 const createCarBtn = document.querySelector("button");
 const carListUlEl = document.querySelector("ul");
+const sortBySelectEl = document.querySelector("select");
 
 createCarBtn.addEventListener("click", function () {
-  if (!makeInputEl.value || !modelInputEl.value || !colorInputEl.value)
+  if (
+    !makeInputEl.value ||
+    !modelInputEl.value ||
+    !colorInputEl.value ||
+    !priceInputEl.value
+  )
     return alert("please fill out all info about the car");
   const car = new Car(
     makeInputEl.value,
     modelInputEl.value,
-    colorInputEl.value
+    colorInputEl.value,
+    priceInputEl.value
   );
 
   cars.push(car);
@@ -32,26 +40,27 @@ createCarBtn.addEventListener("click", function () {
   makeInputEl.value = "";
   modelInputEl.value = "";
   colorInputEl.value = "";
+  priceInputEl.value = "";
   const carEl = car.addCarToList();
   carListUlEl.appendChild(carEl);
 });
 
 class Car {
   // predefined method that gets called when we instantiate a class
-  constructor(make, model, color) {
+  constructor(make, model, color, price) {
     this.make = make;
     this.model = model;
     this.isRunning = false;
     this.color = color;
-    this.id = nextCarId;
-    nextCarId++
+    this.price = price;
+    this.id = Car.nextCarId;
+    Car.nextCarId++;
   }
 
-// variable on class itself
-// actual property that exist on the CLASS itself, not the instance of the obj
-// static is the syntax for creating a variable in classes
-static nextCarId = 1
-
+  // variable on class itself
+  // actual property that exist on the CLASS itself, not the instance of the obj
+  // static is the syntax for creating a variable in classes
+  static nextCarId = 1;
 
   //   this provides the following func to all future instances of this obj
   start() {
@@ -64,17 +73,34 @@ static nextCarId = 1
     this.isRunning = false;
     console.log(`This ${this.make} has been stopped`);
   }
-//   add car to list
+  //   add car to list
   addCarToList() {
     const newCarEl = document.createElement("li");
-    newCarEl.innerText = `Car #${this.id}\n\n Make: ${
-      this.make
-    } \n Model: ${this.model} \n Color: ${this.color}`;
+    newCarEl.innerText = `Car #${this.id}\n\n Make: ${this.make} \n Model: ${this.model} \n Color: ${this.color} \n Price: $${this.price}`;
     return newCarEl;
   }
 }
+console.log(cars);
+// remove list item
+carListUlEl.addEventListener("click", (e) => {
+  console.log(e.target);
+  e.target.remove();
+});
 
-
+sortBySelectEl.addEventListener("change", (e) => {
+  if (e.target.value === "highest") {
+    cars.sort((a, b) => b["price"] - a["price"]);
+    console.log(cars)
+  }
+  if (e.target.value === "lowest") {
+    cars.sort((a, b) => a["price"] - b["price"]);
+    console.log(cars)
+  }
+  if (e.target.value === "id") {
+    cars.sort((a, b) => a["id"] - b["id"]);
+    console.log(cars)
+  }
+});
 /*
 2x2 grid
 * Grid

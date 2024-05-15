@@ -11,13 +11,13 @@
 body {
   background-color: #2b2b2b;
   color: #f2f2f2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
 }
 
 header {
+  grid-column: 1/-1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,25 @@ header {
   background-color: rgb(177, 88, 56);
   height: 10vh;
 }
-
+.input-group,
+section {
+  grid-row: 2;
+  padding: 2rem;
+}
+.input-groups-container {
+    display: flex;
+    flex-direction: column;
+   
+}
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  grid-column: 1;
+}
+section {
+  grid-column: 2;
+}
 .input-group,
 button {
   margin: 1rem auto;
@@ -34,19 +52,23 @@ button {
 }
 input {
   padding: 2px;
+  margin-left: 1rem;;
 }
 button {
   padding: 4px;
+  
 }
 h4 {
   border-top: solid 2px #f2f2f2;
-  width: 100vw;
+
   text-align: center;
   padding-top: 2rem;
 }
 
 li {
-    margin: 1rem;
-    list-style: none;
-
+  margin: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  
 }
